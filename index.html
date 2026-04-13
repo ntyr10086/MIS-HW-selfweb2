@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個人簡介 · 張煊佩</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#fdf8f0;--cream2:#f5ede0;--cream3:#eeddd0;--cream4:#e8d8c4;
+  --nav:#4a3420;--brown:#5c4228;--brown2:#7a5c3a;--brown3:#a07850;
+  --muted:#8c7460;--border:#ddd0bc;--text:#3d2c1a;
+}
+body{background:var(--cream);color:var(--text);font-family:'Noto Sans TC',sans-serif;font-weight:300;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:300;background:var(--nav);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:54px;}
+.nav-brand{color:#f0e4d0;font-family:'Noto Sans TC',sans-serif;font-size:1.509rem;font-weight:600;letter-spacing:0.08em;text-decoration:none}
+.menu-btn{background:none;border:1px solid rgba(240,228,208,0.28);color:#f0e4d0;cursor:pointer;padding:0.32rem 0.9rem;border-radius:2px;font-size:1.246rem;letter-spacing:0.1em;font-family:'Noto Sans TC',sans-serif;display:flex;align-items:center;gap:0.5rem;transition:background 0.15s;}
+.menu-btn:hover{background:rgba(255,255,255,0.08)}
+.hbg{display:flex;flex-direction:column;gap:4px;width:15px}
+.hbg span{display:block;height:1.5px;background:#f0e4d0;border-radius:1px;transition:transform 0.22s,opacity 0.22s}
+.menu-btn.open .hbg span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.menu-btn.open .hbg span:nth-child(2){opacity:0}
+.menu-btn.open .hbg span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.dropdown{position:fixed;top:54px;right:0;z-index:290;background:var(--nav);width:100%;display:none;}
+.dropdown.open{display:block}
+.dropdown a{display:block;padding:0.9rem 1.5rem;color:#d4c4ac;text-decoration:none;font-size:1.362rem;border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.12s,color 0.12s;}
+.dropdown a:hover{background:rgba(255,255,255,0.06);color:#f0e4d0}
+.dropdown a .num{font-size:1.034rem;color:#a07850;margin-right:0.55rem;letter-spacing:0.1em}
+
+/* HERO */
+.hero{
+  min-height:100vh;padding-top:54px;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.hero-left{
+  background:var(--cream2);
+  display:flex;align-items:center;justify-content:center;
+  padding:4rem clamp(2rem,6vw,5rem);
+  position:relative;
+}
+.hero-left::after{
+  content:'';position:absolute;right:-1px;top:0;bottom:0;
+  width:60px;background:var(--cream2);
+  clip-path:polygon(0 0,0 100%,100% 100%);
+}
+.hero-right{
+  background:var(--cream);
+  display:flex;align-items:center;
+  padding:4rem clamp(2rem,6vw,5rem) 4rem 3rem;
+}
+.photo-circle{
+  width:clamp(190px,22vw,270px);aspect-ratio:1;
+  border-radius:50%;overflow:hidden;
+  border:3px solid var(--cream4);
+  background:var(--cream3);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+}
+.photo-circle img{width:100%;height:100%;object-fit:cover}
+.hero-info{width:100%}
+.hero-tag{font-size:1.017rem;letter-spacing:0.22em;color:var(--brown3);text-transform:uppercase;margin-bottom:0.65rem;}
+.hero-name{font-family:'Noto Sans TC',sans-serif;font-size:clamp(3.281rem,4vw,4.921rem);font-weight:700;color:var(--brown);line-height:1.15;margin-bottom:0.45rem;}
+.hero-dept{font-size:1.427rem;color:var(--muted);margin-bottom:1.8rem;letter-spacing:0.03em;}
+.divider{width:32px;height:1px;background:var(--border);margin-bottom:1.3rem;}
+.irow{display:grid;grid-template-columns:5.5rem 1fr;gap:0 0.5rem;margin-bottom:0.5rem;font-size:1.394rem;align-items:baseline;}
+.ikey{color:var(--brown3);font-size:1.279rem;}
+.ival{color:var(--muted);}
+
+@media(max-width:680px){
+  .hero{grid-template-columns:1fr}
+  .hero-left{padding:4rem 2rem 2rem;justify-content:center}
+  .hero-left::after{display:none}
+  .hero-right{padding:2.5rem 2rem 4rem;justify-content:center}
+  .hero-info{text-align:center}
+  .divider{margin-left:auto;margin-right:auto}
+  .irow{justify-content:center}
+}
+
+/* SECTIONS */
+.sec{
+  border-top:1px solid var(--border);
+  padding:3.5rem clamp(2rem,8vw,7rem);
+}
+.sec-inner{max-width:900px;margin:0 auto;}
+.sec-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem;}
+.sec-num{font-family:'Noto Sans TC',sans-serif;font-size:3.281rem;font-weight:700;color:var(--cream4);line-height:1;flex-shrink:0;}
+.sec-title{font-family:'Noto Sans TC',sans-serif;font-size:1.804rem;font-weight:600;color:var(--brown);}
+
+/* 興趣專長 tags */
+.tags{display:flex;flex-wrap:wrap;gap:0.6rem;}
+.tag{padding:0.36rem 1rem;border:1px solid var(--border);border-radius:20px;font-size:1.345rem;color:var(--brown2);background:var(--cream2);}
+
+/* 高中經歷 cards */
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.1rem;}
+.exp-card{background:var(--cream2);border:1px solid var(--border);border-radius:6px;padding:1.4rem 1.5rem;}
+.exp-label{font-size:1.001rem;letter-spacing:0.15em;color:var(--brown3);text-transform:uppercase;margin-bottom:0.5rem;}
+.exp-text{font-size:1.41rem;color:var(--muted);line-height:1.72;}
+.exp-link{
+  display:inline-flex;align-items:center;gap:0.35rem;
+  margin-top:0.75rem;font-size:1.329rem;
+  color:var(--brown2);text-decoration:none;
+  border-bottom:1px solid var(--border);padding-bottom:1px;
+  transition:color 0.15s,border-color 0.15s;
+}
+.exp-link:hover{color:var(--brown);border-color:var(--brown2)}
+
+footer{text-align:center;padding:1.8rem;border-top:1px solid var(--border);font-size:1.181rem;color:var(--muted);background:var(--cream2);letter-spacing:0.06em;}
+
+/* ── Typography enhancements ── */
+.sec-num, .pg-eyebrow, .hero-tag, .bl, .exp-label, .info-key,
+.card-num, .tbp, .sc-name, .bv, .tl-period, .ikey {
+  font-family:'Noto Sans TC',sans-serif;
+  letter-spacing:0.12em;
+}
+.hero-name, .pg-title, .sec-title, .bt, .jname, .sc-code {
+  font-family:'Noto Sans TC',sans-serif;
+  letter-spacing:-0.01em;
+}
+.hero-dept, .ival, .info-val, .exp-text, .block p, .tag-item {
+  font-family:'Noto Sans TC',sans-serif;
+  letter-spacing:0.02em;
+  line-height:1.9;
+}
+
+
+h1,h2,.hero-name,.pg-title,.sec-title,.sec-num,.bt,.hero-name{
+  letter-spacing:0.03em;
+}
+.hero-name{
+  font-weight:600;
+}
+.sec-num,.pg-eyebrow,.hero-tag,.bl,.exp-label,.info-label,
+.nav-brand,.pg-eyebrow,.hero-eyebrow,.ikey,.hero-tag{
+  font-family:'Noto Sans TC',sans-serif;
+  letter-spacing:0.12em;
+}
+.block p,.exp-text,.ival,.info-val,.bv,.ts,.tl-sub,.sc-num{
+  font-weight:300;
+  letter-spacing:0.01em;
+}
+.bt{
+  }
+
+/* ── 字重層次 ── */
+h1,.hero-name{font-weight:700;letter-spacing:-0.01em;}
+h2,.pg-title,.sec-title,.bt,.jname{font-weight:600;}
+.pg-eyebrow,.bl,.exp-label,.hero-tag,.sec-num,.hero-eyebrow,.ikey,
+.nav-brand,.info-label{font-weight:500;letter-spacing:0.08em;}
+body,.block p,.exp-text,.ival,.muted{font-weight:300;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">個人簡介</a>
+  <button class="menu-btn" id="menuBtn">
+    <div class="hbg"><span></span><span></span><span></span></div>
+    MENU
+  </button>
+</nav>
+<div class="dropdown" id="dd">
+  <a href="index.html"><span class="num">00</span>首頁</a>
+  <a href="career.html"><span class="num">01</span>職涯測驗結果</a>
+  <a href="job.html"><span class="num">02</span>目標職缺 · 未來規劃</a>
+  <a href="autobiography.html"><span class="num">03</span>自傳履歷</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="photo-circle">
+      <img src="photo.jpg" alt="張煊佩">
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-info">
+      <p class="hero-tag">Profile</p>
+      <h1 class="hero-name">張煊佩</h1>
+      <p class="hero-dept">靜宜大學 · 資訊管理學系</p>
+      <div class="divider"></div>
+      <div class="irow"><span class="ikey">系　級</span><span class="ival">資管二A</span></div>
+      <div class="irow"><span class="ikey">學　號</span><span class="ival">411303083</span></div>
+      <div class="irow"><span class="ikey">信　箱</span><span class="ival">s1130308<span>&#64;</span>o365st.pu.edu.tw</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 興趣專長 ── -->
+<div class="sec">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <span class="sec-title">興趣專長</span>
+    </div>
+    <div class="tags">
+      <span class="tag">繪畫</span>
+      <span class="tag">設計</span>
+      <span class="tag">分析</span>
+      <span class="tag">動畫製作</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── 大學經歷 ── -->
+<div class="sec">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <span class="sec-title">大學經歷</span>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-label">學校</div>
+        <div class="exp-text">靜宜大學 資訊管理學系</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-label">職務</div>
+        <div class="exp-text">領頭羊 — 帶領學弟妹適應大學生活，舉辦活動幫助他們彼此認識、熟悉校園和適應課業</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 高中經歷 ── -->
+<div class="sec">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <span class="sec-title">高中經歷</span>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-label">職務</div>
+        <div class="exp-text">擔任學藝</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-label">社團</div>
+        <div class="exp-text">手創社副社長</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-label">活動</div>
+        <div class="exp-text">參與數場遊程規劃、在地創生與桌遊創作活動及比賽</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-label">作品</div>
+        <div class="exp-text">將自己設計的桌遊放上募資平台</div>
+        <a class="exp-link" href="https://wabay.tw/projects/stoneweirzzle" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          查看募資頁面
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 張煊佩 · 靜宜大學資訊管理學系</footer>
+
+<script>
+var btn = document.getElementById('menuBtn');
+var dd = document.getElementById('dd');
+btn.addEventListener('click', function(e){
+  e.stopPropagation();
+  btn.classList.toggle('open');
+  dd.classList.toggle('open');
+});
+document.addEventListener('click', function(){
+  btn.classList.remove('open');
+  dd.classList.remove('open');
+});
+</script>
+</body>
+</html>
